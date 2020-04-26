@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+  wordpress:
+    image: felipeelia/wordpress
+#    image: felipeelia/wordpress:php-5.6
+    links:
+      - mysql
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ../dev:/var/www/html
+      - ./htaccess_dev:/var/www/html/.htaccess
+      - ./dev.ini:/usr/local/etc/php/conf.d/dev.ini
+#    environment:
+#      - XDEBUG=true
+
+  mysql:
+    image: mariadb
+    volumes:
+      - ../db_data:/var/lib/mysql
+    ports:
+     - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+      MYSQL_ROOT_HOST: '%'
+
+#  mailhog:
+#    image: mailhog/mailhog
+#    ports:
+#      - "1025:1025"
+#      - "8025:8025"
+
+#  phpmyadmin:
+#    image: phpmyadmin/phpmyadmin
+#    container_name: phpmyadmin
+#    environment:
+#     - PMA_ARBITRARY=1
+#     - PMA_HOST=mysql
+#     - PMA_USER=root
+#     - PMA_PASSWORD=wordpress
+#    restart: always
+#    ports:
+#     - 8080:80
+#    volumes:
+#     - /sessions
+
+#  node:
+#    image: node
+#    user: node
+#    working_dir: /app
+#    volumes:
+#      - ../dev/wp-content/themes/THEME_NAME:/app
+#    ports:
+#      - 35729:35729
+#    command: bash -c 'npm install && /app/node_modules/grunt/bin/grunt'

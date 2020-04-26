@@ -1,0 +1,4 @@
+# Evita que os usuários vejam a infra utilizada
+<IfModule mod_rewrite.c>
+RewriteRule ^.*(\.git|docker|bd).* - [R=404]
+</IfModule>

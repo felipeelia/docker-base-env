@@ -1,0 +1,11 @@
+!/docker/docker-compose.yml
+!/dev/wp-content/uploads/
+
+node_modules
+package-lock.json
+
+/db_data/
+/dev/.htaccess
+/dev/wp-content/languages/
+/dev/wp-content/cache/
+/dev/wp-content/uploads/
